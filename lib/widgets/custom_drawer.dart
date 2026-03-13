@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:responsive_dashboard/helpers/color_manager.dart';
 import 'package:responsive_dashboard/helpers/image_assets';
 import 'package:responsive_dashboard/widgets/drawer_item.dart';
 import 'package:responsive_dashboard/widgets/drawer_item_list.dart';
@@ -9,30 +10,56 @@ class CustomDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        //! user info
-        Padding(
-          padding: const EdgeInsets.only(bottom: 8),
-          child: ListTileUserInfo(
-            subTitle: "Keroles Keroles",
-            title: "Keroles Sami",
-            icon: Assets.iconsAvatar1,
+    final width = MediaQuery.sizeOf(context).width;
+    return Container(
+      width: width * 0.6,
+      padding: EdgeInsets.only(left: 28),
+      color: ColorManager.white,
+      child: CustomScrollView(
+        slivers: [
+          //! =======
+          SliverToBoxAdapter(child: SizedBox(height: 112)),
+          //! user info
+          SliverToBoxAdapter(
+            child: Container(
+              margin: EdgeInsets.only(right: 20),
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 8),
+                child: ListTileUserInfo(
+                  subTitle: "Keroles Keroles",
+                  title: "Keroles Keroles",
+                  icon: Assets.iconsAvatar1,
+                ),
+              ),
+            ),
           ),
-        ),
 
-        //! items
-        DrawerItemList(),
-        Spacer(),
-        Container(
-          padding: EdgeInsets.only(top: 20),
-          child: DrawerItem(title: "Setting system", icon: Assets.iconsSetting),
-        ),
-        Container(
-          padding: EdgeInsets.only(top: 20, bottom: 48),
-          child: DrawerItem(title: "Logout account", icon: Assets.iconsLogout),
-        ),
-      ],
+          //! items
+          DrawerItemList(),
+          SliverFillRemaining(
+            hasScrollBody: false,
+            child: Column(
+              children: [
+                Spacer(),
+                Container(
+                  padding: EdgeInsets.only(top: 20),
+                  child: DrawerItem(
+                    title: "Setting system",
+                    icon: Assets.iconsSetting,
+                  ),
+                ),
+                Container(
+                  padding: EdgeInsets.only(top: 20, bottom: 48),
+                  child: DrawerItem(
+                    title: "Logout account",
+                    icon: Assets.iconsLogout,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

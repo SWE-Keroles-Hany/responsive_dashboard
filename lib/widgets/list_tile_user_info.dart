@@ -14,11 +14,28 @@ class ListTileUserInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      tileColor: ColorManager.lightGrey,
-      leading: SvgPicture.asset(icon),
-      title: Text(title, style: AppStyles.semiBold16),
-      subtitle: Text(subTitle, style: AppStyles.regular12),
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: const BorderRadius.all(Radius.circular(12)),
+        color: ColorManager.lightGrey,
+      ),
+      child: Center(
+        child: ListTile(
+          leading: SvgPicture.asset(icon),
+          title: FittedBox(
+            alignment: AlignmentGeometry.centerLeft,
+            fit: BoxFit.scaleDown,
+            child: Text(title, style: AppStyles.semiBold16.copyWith()),
+          ),
+          subtitle: FittedBox(
+            alignment: AlignmentGeometry.centerLeft,
+
+            fit: BoxFit.scaleDown,
+
+            child: Text(subTitle, style: AppStyles.regular12),
+          ),
+        ),
+      ),
     );
   }
 }

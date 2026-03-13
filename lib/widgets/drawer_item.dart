@@ -22,14 +22,18 @@ class DrawerItem extends StatelessWidget {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8),
 
-                color: ColorManager.secondary,
+                color: ColorManager.primary,
               ),
             )
           : null,
       leading: SvgPicture.asset(icon),
-      title: Text(
-        title,
-        style: isActive ? AppStyles.bold16 : AppStyles.regular16,
+      title: FittedBox(
+        alignment: AlignmentGeometry.centerLeft,
+        fit: BoxFit.scaleDown,
+        child: Text(
+          title,
+          style: isActive ? AppStyles.bold16 : AppStyles.regular16,
+        ),
       ),
     );
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:responsive_dashboard/helpers/size_config.dart';
 
 class AdaptiveLayout extends StatelessWidget {
   const AdaptiveLayout({
@@ -10,11 +11,15 @@ class AdaptiveLayout extends StatelessWidget {
   final WidgetBuilder mobileLayout, tabletLayout, desktopLayout;
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.sizeOf(context).width;
     return LayoutBuilder(
       builder: (context, constraints) {
-        if (constraints.maxWidth < 600) {
+        print("layout : ${constraints.maxWidth}");
+        print("width : $width");
+
+        if (width <= SizeConfig.tabletpWidth) {
           return mobileLayout(context);
-        } else if (constraints.maxWidth < 900) {
+        } else if (width <= SizeConfig.desktopWidth) {
           return tabletLayout(context);
         } else {
           return desktopLayout(context);
